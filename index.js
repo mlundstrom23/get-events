@@ -2,9 +2,9 @@ const Alexa = require('ask-sdk-core')
 const axios = require('axios')
 
 function getEvent(city, day) {
-  // Only getting events in the US right now
+  const apikey = process.env.TICKETMASTER_API_KEY
   var date1 = `${day}` + 'T14:00:00';
-  const url = `https://app.ticketmaster.com/discovery/v2/events.json?city=${city}&localStartDateTime=${date1},${date1}&apikey=${process.env.API_KEY}`
+  const url = `https://app.ticketmaster.com/discovery/v2/events.json?city=${city}&localStartDateTime=${date1},${date1}&apikey=${apikey}`
 
   return axios.get(url).then(function (response) {
     return response.data._embedded.events[0].name
