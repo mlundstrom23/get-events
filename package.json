@@ -4,14 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npm run build:clean && npm run build:zip",
+    "build:clean": "rm -f getevents.zip",
+    "build:zip": "zip -r getevents.zip ./node_modules index.js",
+    "deploy": "npm run build && npm run upload",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "upload": "aws lambda update-function-code --function-name GetEvents --zip-file fileb://getevents.zip"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mlundstrom23/get-events.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Marina Lundstrom",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/mlundstrom23/get-events/issues"
@@ -19,6 +24,7 @@
   "homepage": "https://github.com/mlundstrom23/get-events#readme",
   "dependencies": {
     "ask-sdk-core": "^2.7.0",
-    "ask-sdk-model": "^1.25.1"
+    "ask-sdk-model": "^1.25.1",
+    "axios": "^0.19.0"
   }
 }
